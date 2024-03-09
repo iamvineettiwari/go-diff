@@ -5,7 +5,7 @@ func longgestCommonSubsequence(firstItem, secondItem []string, firstIdx, secondI
 		return []string{}
 	}
 
-	if _, isFirstIdxCalcualted := cache[firstIdx]; isFirstIdxCalcualted {
+	if _, isFirstIdxCalculated := cache[firstIdx]; isFirstIdxCalculated {
 		if calculatedResult, isSecondIdxCalculated := cache[firstIdx][secondIdx]; isSecondIdxCalculated {
 			return calculatedResult
 		}
