@@ -14,25 +14,25 @@ func longgestCommonSubsequence(firstItem, secondItem []string, firstIdx, secondI
 	}
 
 	if firstItem[firstIdx] == secondItem[secondIdx] {
-		moveBothPointerCollectedData := longgestCommonSubsequence(firstItem, secondItem, firstIdx+1, secondIdx+1, cache)
-		moveBothPointerCollectedData = append([]string{firstItem[firstIdx]}, moveBothPointerCollectedData...)
-		cache[firstIdx][secondIdx] = moveBothPointerCollectedData
-		return moveBothPointerCollectedData
+		dataCollectedByMovingBothPointer := longgestCommonSubsequence(firstItem, secondItem, firstIdx+1, secondIdx+1, cache)
+		dataCollectedByMovingBothPointer = append([]string{firstItem[firstIdx]}, dataCollectedByMovingBothPointer...)
+		cache[firstIdx][secondIdx] = dataCollectedByMovingBothPointer
+		return dataCollectedByMovingBothPointer
 	}
 
-	moveFirstPointerCollectedData := longgestCommonSubsequence(firstItem, secondItem, firstIdx+1, secondIdx, cache)
-	moveSecondPointerCollectedData := longgestCommonSubsequence(firstItem, secondItem, firstIdx, secondIdx+1, cache)
+	dataCollectedByMovingOnlyFirstPointer := longgestCommonSubsequence(firstItem, secondItem, firstIdx+1, secondIdx, cache)
+	dataCollectedByMovingOnlySecondPointer := longgestCommonSubsequence(firstItem, secondItem, firstIdx, secondIdx+1, cache)
 
-	firstPointerCollectedDataLen := len(moveFirstPointerCollectedData)
-	secondPointerCollectedDataLen := len(moveSecondPointerCollectedData)
+	firstPointerCollectedDataLen := len(dataCollectedByMovingOnlyFirstPointer)
+	secondPointerCollectedDataLen := len(dataCollectedByMovingOnlySecondPointer)
 
 	if firstPointerCollectedDataLen > secondPointerCollectedDataLen {
-		cache[firstIdx][secondIdx] = moveFirstPointerCollectedData
-		return moveFirstPointerCollectedData
+		cache[firstIdx][secondIdx] = dataCollectedByMovingOnlyFirstPointer
+		return dataCollectedByMovingOnlyFirstPointer
 	}
 
-	cache[firstIdx][secondIdx] = moveSecondPointerCollectedData
-	return moveSecondPointerCollectedData
+	cache[firstIdx][secondIdx] = dataCollectedByMovingOnlySecondPointer
+	return dataCollectedByMovingOnlySecondPointer
 }
 
 func FindCommon(firstItem, secondItem []string) []string {
